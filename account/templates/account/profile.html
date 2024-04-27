@@ -7,6 +7,16 @@
         <a href="{% url 'home:post_create' %}" class="btn btn-primary" style="margin-bottom: 20px"> Creat new post</a>
     {% endif %}
 
+    {% if request.user.id != user.id %}
+
+        {% if not is_following %}
+            <a style="margin-bottom: 20px" class="btn btn-primary" href="{% url 'account:user_follow' user.id %}">Follow</a>
+        {% else %}
+            <a style="margin-bottom: 20px" class="btn btn-danger" href="{% url 'account:user_unfollow' user.id %}">Unfollow</a>
+        {% endif %}
+
+    {% endif %}
+
     <div class="card">
         {% for post in posts %}
             <a class="card-body" href="{{ post.get_absolute_url }}">{{ post.body|truncatewords:5 }}</a>
