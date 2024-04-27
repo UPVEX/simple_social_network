@@ -9,4 +9,6 @@
         {{ form.as_p }}
         <input type="submit" value="Register">
     </form>
+    <br>
+    <a href="{% url 'account:user_login' %}">already have an account?</a>
 {% endblock %}
