@@ -9,11 +9,12 @@
         <a href="{% url 'home:post_update' post.id %}" class="btn btn-info">Update</a>
     {% endif %}
 
-    <hr>
-    <br>
-    <br>
 
     {% if request.user.is_authenticated %}
+        <a href="{% url 'home:post_like' post.id %}" class=" {% if can_like %}disabled{% endif %} btn btn-primary">{{ post.likes_count }} like</a>
+        <hr>
+        <br>
+        <br>
         <form action="" method="post">
             {% csrf_token %}
             {{ form.as_p }}
