@@ -8,13 +8,34 @@
         <a href="{% url 'home:post_delete' post.id %}" class="btn btn-danger">Delete</a>
         <a href="{% url 'home:post_update' post.id %}" class="btn btn-info">Update</a>
     {% endif %}
+
     <hr>
     <br>
+    <br>
+
+    {% if request.user.is_authenticated %}
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input class="btn btn-primary" style="margin-bottom: 15px" type="submit" value="send">
+        </form>
+    {% else %}
+        <p class="alert alert-danger"> you need to logged in to send comment</p>
+    {% endif %}
+
     {% for comment in comments %}
         <div class="card bg-dark text-white">
             <p class="card-header ">{{ comment.user }} | {{ comment.created|timesince }}</p>
             <p class="card-body">{{ comment.body }}</p>
+
+            {% with replies=comment.rcomments.all %}
+            {% for reply in replies %}
+                <p class="bg-primary p-3 m-2 " style="border-radius: 20px">{{ reply.user }} | {{ reply.created|timesince }} <br> {{ reply.body }}</p>
+            {% endfor %}
+        {% endwith %}
         </div>
+        <br>
+
     {% empty %}
         <div class="card bg-dark text-white">
             <br>
@@ -22,4 +43,5 @@
             <br>
         </div>
     {% endfor %}
+
 {% endblock %}
