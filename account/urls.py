@@ -15,4 +15,8 @@ urlpatterns = [
     # relation
     path('follow/<int:user_id>/', views.UserFollowView.as_view(), name='user_follow'),
     path('unfollow/<int:user_id>', views.UserUnfollowView.as_view(), name='user_unfollow'),
+
+    # edit user
+    path('edit_user/', views.UserEditView.as_view(), name='edit_user'),
+
 ]

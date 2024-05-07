@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h4 style="margin-left: 5px">index page</h4>
+    <form action="" method="get">
+        {{ form.as_p }}
+        <input type="submit" value="search">
+    <br>
+    </form>
+    <br>
+
     <div class="card">
         {% for post in posts %}
             <a class="card-body" href="{{ post.get_absolute_url }}">{{ post.body|truncatewords:5 }}</a>

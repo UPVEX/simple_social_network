@@ -5,6 +5,7 @@
 
     {% if request.user.id == user.id %}
         <a href="{% url 'home:post_create' %}" class="btn btn-primary" style="margin-bottom: 20px"> Creat new post</a>
+        <a href="{% url 'account:edit_user' %}" class="btn btn-info" style="margin-bottom: 20px"> Edit profile</a>
     {% endif %}
 
     {% if request.user.id != user.id %}
